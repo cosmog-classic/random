@@ -140,7 +140,6 @@
     const backButton = document.getElementById("back-button");
     backButton.addEventListener("click", () => {
       const nextPage = (currentPage + 1) % totalCards;
-      // Pass nextPage param to index.html so it can load the correct card
       window.location.href = `index.html?page=${nextPage}`;
     });
   </script>
