@@ -92,40 +92,41 @@
   </div>
 
   <script>
-    // Parse query parameters
-    const params = new URLSearchParams(window.location.search);
-    const image = params.get("image");
-    const heading = params.get("heading");
-    const sub = params.get("sub");
-    const emote = params.get("emote");
-    const pageStr = params.get("page");
+  const urlParams = new URLSearchParams(window.location.search);
 
-    const cardImage = document.getElementById("card-image");
-    const mainHeading = document.getElementById("main-heading");
-    const subMessage = document.getElementById("sub-message");
-    const emoticon = document.getElementById("emoticon");
-    const backButton = document.getElementById("back-button");
+  const image = urlParams.get("image") || "me.png"; // default image if none passed
+  const currentPage = parseInt(urlParams.get("page")) || 0;
 
-    cardImage.src = image ? `./${image}` : "";
-    mainHeading.textContent = heading || "";
-    subMessage.textContent = sub || "";
-    emoticon.textContent = emote || "";
+  // Update only the image source dynamically
+  const imgElem = document.querySelector(".image-frame img");
+  imgElem.src = image;
 
-    // Convert page index from URL, fallback 0
-    let currentPage = parseInt(pageStr, 10);
-    if (isNaN(currentPage) || currentPage < 0) currentPage = 0;
+  const totalMessages = 4; // number of messages in index.html cycle
 
-    const totalPages = 4; // total cards count (should match index.html messages length)
+  // Create Back button
+  const backBtn = document.createElement("button");
+  backBtn.textContent = "Back";
+  backBtn.style = `
+    margin-top: 40px;
+    font-family: "Mochiy Pop One", sans-serif;
+    background: linear-gradient(45deg, #ff8fab, #ffafcc);
+    color: white;
+    border: none;
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-size: 1.2em;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+    border-bottom: 4px solid #e85d95;
+  `;
 
-    backButton.addEventListener("click", () => {
-      // Calculate next page index (cycle forward)
-      let nextPage = (currentPage + 1) % totalPages;
+  backBtn.addEventListener("click", () => {
+    const nextPage = (currentPage + 1) % totalMessages;
+    window.location.href = `index.html?page=${nextPage}`;
+  });
 
-      // Redirect back to index.html with ?page=nextPage
-      const url = new URL("index.html", window.location.href);
-      url.searchParams.set("page", nextPage);
-      window.location.href = url.toString();
-    });
-  </script>
+  document.querySelector(".caption").appendChild(backBtn);
+</script>
+
 </body>
 </html>
