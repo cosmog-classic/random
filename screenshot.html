@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=1080, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Screenshot Message</title>
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Open+Sans:wght@400;700&display=swap");
@@ -10,28 +10,33 @@
     html, body {
       margin: 0;
       padding: 0;
-      width: 1080px;
-      height: 1920px;
+      width: 100vw;
+      height: 100vh;
       font-family: "Open Sans", sans-serif;
       background-color: #fff0f6;
-      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .screenshot-container {
-      width: 100%;
-      height: 100%;
-      padding: 60px;
-      box-sizing: border-box;
+      width: 1080px;
+      height: 1920px;
+      background: #ffffff;
+      border: 20px solid #ffb3c1;
+      border-radius: 48px;
+      box-shadow: 0 0 60px rgba(255, 105, 180, 0.3);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      position: relative;
+      box-sizing: border-box;
+      padding: 60px 40px;
     }
 
     .image-frame {
       width: 600px;
-      height: 600px;
+      height: 1066px; /* Portrait 9:16 ratio */
       background: #ffe0ec;
       border: 16px dashed #ffb3c1;
       border-radius: 48px;
@@ -81,7 +86,7 @@
 <body>
   <div class="screenshot-container">
     <div class="image-frame">
-      <img src="me.png" alt="Framed Love" />
+      <img src="me.png" alt="Cute Portrait" />
     </div>
     <div class="caption">
       <h1>I love you!</h1>
