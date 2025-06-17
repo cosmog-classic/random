@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Screenshot Message</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Open+Sans:wght@400;700&display=swap");
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      font-family: "Open Sans", sans-serif;
+      background-color: #fff0f6;
+      overflow: hidden;
+    }
+
+    .screenshot-container {
+      width: 1080px;
+      height: 1920px;
+      background: #ffffff;
+      border: 20px solid #ffb3c1;
+      border-radius: 48px;
+      box-shadow: 0 0 60px rgba(255, 105, 180, 0.3);
+      margin: 0 auto;
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    .decorative-frame {
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      background: #ffe0ec;
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 0 30px rgba(255, 192, 203, 0.3);
+      text-align: center;
+    }
+
+    .decorative-frame img {
+      width: 200px;
+      height: 200px;
+      border-radius: 24px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 16px rgba(255, 105, 180, 0.3);
+    }
+
+    .decorative-frame h1 {
+      font-family: "Mochiy Pop One", sans-serif;
+      font-size: 3em;
+      color: #ff69b4;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px white;
+    }
+
+    .decorative-frame p {
+      font-size: 1.8em;
+      color: #e85d95;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .emoticon {
+      font-size: 2em;
+      margin-top: 30px;
+      color: #f78fb3;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="screenshot-container">
+    <div class="decorative-frame">
+      <img src="https://placehold.co/200x200/ffd1e0/ff69b4?text=Love" alt="Cute" />
+      <h1>I love you!</h1>
+      <p>Always and forever.</p>
+      <div class="emoticon">(´♡‿♡`)</div>
+    </div>
+  </div>
+</body>
+</html>
