@@ -2,110 +2,130 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Screenshot Message</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Screenshot View</title>
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Open+Sans:wght@400;700&display=swap");
-
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100vw;
-      height: 100vh;
-      font-family: "Open Sans", sans-serif;
-      background-color: #fff0f6;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    /* Minimal styling to keep consistent */
+    body, html {
+      margin: 0; padding: 0; height: 100%; display: flex; justify-content: center; align-items: center; font-family: "Open Sans", sans-serif; background-color: #fcefee;
     }
-
-    .screenshot-container {
-      width: 1920px;
-      height: 1080px;
-      background: #ffffff;
-      border: 20px solid #ffb3c1;
-      border-radius: 48px;
-      box-shadow: 0 0 60px rgba(255, 105, 180, 0.3);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      box-sizing: border-box;
-      padding: 60px 40px;
-    }
-
-    .image-frame {
-      width: 1280px;
-      height: 720px; /* Portrait 9:16 ratio */
-      background: #ffe0ec;
-      border: 16px dashed #ffb3c1;
-      border-radius: 48px;
+    .memo-card {
+      background-color: white;
+      width: 90%;
+      max-width: 400px;
       padding: 30px;
-      box-sizing: border-box;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 12px 40px rgba(255, 105, 180, 0.3);
-    }
-
-    .image-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
       border-radius: 24px;
-    }
-
-    .caption {
-      margin-top: 60px;
+      border: 2px dashed #ffb3c1;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       text-align: center;
     }
-
-    .caption h1 {
-      font-family: "Mochiy Pop One", sans-serif;
-      font-size: 3.5em;
-      color: #ff69b4;
-      margin: 0;
-      text-shadow: 2px 2px white;
+    .image-container {
+      background-color: #ffdde1;
+      padding: 10px;
+      border-radius: 16px;
+      display: inline-block;
+      margin-bottom: 20px;
+      border: 2px solid #fff;
+      box-shadow: 0 4px 10px rgba(255, 179, 193, 0.5);
     }
-
-    .caption p {
-      font-size: 2em;
+    .image-container img {
+      width: 100px;
+      height: 100px;
+      display: block;
+      border-radius: 12px;
+    }
+    h1 {
+      font-family: "Mochiy Pop One", sans-serif;
+      color: #ff69b4;
+      font-size: 1.8em;
+      text-shadow: 2px 2px 0px #fff, 4px 4px 0px #ffb3c1;
+      margin: 0 0 25px 0;
+    }
+    .sub-message {
+      border: 2px dashed #ffb3c1;
+      border-radius: 12px;
+      padding: 15px;
+      margin: 20px 0;
+      font-size: 1.2em;
       color: #e85d95;
       font-weight: bold;
+    }
+    .emoticon {
+      font-family: monospace;
+      color: #f78fb3;
+      font-size: 1.2em;
+      margin: 20px 0;
+    }
+    .back-button {
+      font-family: "Mochiy Pop One", sans-serif;
+      background: linear-gradient(45deg, #8fabff, #afccff);
+      color: white;
+      border: none;
+      padding: 15px 35px;
+      border-radius: 50px;
+      font-size: 1.1em;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(91, 136, 255, 0.4);
+      transition: all 0.3s ease;
+      border-bottom: 4px solid #5d95e8;
       margin-top: 20px;
     }
-
-    .emoticon {
-      margin-top: 30px;
-      font-size: 2.5em;
-      color: #f78fb3;
-      font-family: monospace;
+    .back-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(91, 136, 255, 0.5);
+    }
+    .back-button:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 10px rgba(91, 136, 255, 0.4);
     }
   </style>
 </head>
 <body>
-  <div class="screenshot-container">
-    <div class="image-frame">
-      <img src="me.png" alt="Cute Portrait" />
+  <div class="memo-card">
+    <div class="image-container">
+      <img id="card-image" src="" alt="Cute Icon" />
     </div>
-    <div class="caption">
-      <h1>I love you!</h1>
-      <p>Always and forever.</p>
-      <div class="emoticon">(´♡‿♡`)</div>
-    </div>
+    <h1 id="main-heading"></h1>
+    <div class="sub-message" id="sub-message"></div>
+    <p class="emoticon" id="emoticon"></p>
+    <button id="back-button" class="back-button">Back</button>
   </div>
+
   <script>
-  const params = new URLSearchParams(window.location.search);
-  const img = params.get("image");
-  const heading = params.get("heading");
-  const sub = params.get("sub");
-  const emote = params.get("emote");
+    // Parse query parameters
+    const params = new URLSearchParams(window.location.search);
+    const image = params.get("image");
+    const heading = params.get("heading");
+    const sub = params.get("sub");
+    const emote = params.get("emote");
+    const pageStr = params.get("page");
 
-  if (img) document.querySelector(".image-frame img").src = img;
-  if (heading) document.querySelector(".caption h1").textContent = heading;
-  if (sub) document.querySelector(".caption p").textContent = sub;
-  if (emote) document.querySelector(".emoticon").textContent = emote;
-</script>
+    const cardImage = document.getElementById("card-image");
+    const mainHeading = document.getElementById("main-heading");
+    const subMessage = document.getElementById("sub-message");
+    const emoticon = document.getElementById("emoticon");
+    const backButton = document.getElementById("back-button");
 
+    cardImage.src = image || "";
+    mainHeading.textContent = heading || "";
+    subMessage.textContent = sub || "";
+    emoticon.textContent = emote || "";
+
+    // Convert page index from URL, fallback 0
+    let currentPage = parseInt(pageStr, 10);
+    if (isNaN(currentPage) || currentPage < 0) currentPage = 0;
+
+    const totalPages = 4; // total cards count (should match index.html messages length)
+
+    backButton.addEventListener("click", () => {
+      // Calculate next page index (cycle forward)
+      let nextPage = (currentPage + 1) % totalPages;
+
+      // Redirect back to index.html with ?page=nextPage
+      const url = new URL("index.html", window.location.href);
+      url.searchParams.set("page", nextPage);
+      window.location.href = url.toString();
+    });
+  </script>
 </body>
 </html>
