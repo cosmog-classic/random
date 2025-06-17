@@ -11,9 +11,6 @@
 </head>
 <body>
   <div class="memo-card">
-    <div class="image-container">
-      <img id="card-image" src="https://placehold.co/100x100/f8c8dc/a47c8a?text=Cute+Icon" alt="Cute Icon" />
-    </div>
     <h1 id="main-heading">Happy one year and two months!</h1>
     <div class="sub-message" id="sub-message">mi amor!</div>
     <p class="emoticon" id="emoticon">(o´▽`o)</p>
@@ -72,7 +69,6 @@
       mainHeading.textContent = page.heading;
       subMessage.textContent = page.sub;
       emoticon.textContent = page.emote;
-      cardImage.src = page.image;
     }
 
     updateCard(currentPage);
