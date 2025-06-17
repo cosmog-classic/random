@@ -41,7 +41,6 @@
                 animation: popIn 0.5s ease-out forwards;
             }
 
-
             @keyframes popIn {
                 to {
                     transform: scale(1);
@@ -137,82 +136,65 @@
             <p class="instructions">Click the next button!! ♡</p>
             <button id="next-button" class="next-button">Next!! ~w~</button>
         </div>            
-
-                     <div id="final-message" style="display: none; text-align: center;">
-                    <h1 style="color: #ff69b4; font-family: 'Mochiy Pop One', sans-serif;">
-                🎁 You found the surprise!
-            </h1>
-                <p class="sub-message">I made this just for you... hope you loved it ♡</p>
-                <p class="emoticon">(｡♥‿♥｡)</p>
-            </div>
         
         <script>
-const nextButton = document.getElementById("next-button");
-const mainHeading = document.getElementById("main-heading");
-const subMessage = document.getElementById("sub-message");
-const emoticon = document.getElementById("emoticon");
-const finalMessage = document.getElementById("final-message");
-const memoCard = document.querySelector(".memo-card");
-
-const messages = [
-  {
-    heading: "Happy one year and two months!",
-    sub: "mi amor!",
-    emote: "(o´▽`o)",
-    image: "cinnamoroll.png",
-  },
-  {
-    heading: "I hope you have a wonderful day!",
-    sub: "You deserve it!",
-    emote: "(ﾉ´ヮ`)ﾉ*:･ﾟ✧",
-    image: "kawaii2.png",
-  },
-  {
-    heading: "Thank you for everything...",
-    sub: "You make me so happy!",
-    emote: "(*^-^*)",
-    image: "yay.png",
-  },
-  {
-    heading: "I love you!",
-    sub: "Always and forever.",
-    emote: "(´♡‿♡`)",
-    image: "heart.png",
-  },
-];
-
-const params = new URLSearchParams(window.location.search);
-let currentPage = parseInt(params.get("page")) || 0;
-
-function updateCard(pageIndex) {
-  const page = messages[pageIndex];
-  mainHeading.textContent = page.heading;
-  subMessage.textContent = page.sub;
-  emoticon.textContent = page.emote;
-
-  if (pageIndex === messages.length - 1) {
-    nextButton.textContent = "Receive thine present";
-  } else {
-    nextButton.textContent = "Next!! ~w~";
-  }
-}
-
-updateCard(currentPage);
-
-nextButton.addEventListener("click", () => {
-  if (currentPage === messages.length - 1) {
-    // Show final message, hide the memo card
-    memoCard.style.display = "none";
-    finalMessage.style.display = "block";
-  } else {
-    const page = messages[currentPage];
-    const query = new URLSearchParams({
-      image: page.image,
-      page: currentPage,
-    }).toString();
-    window.location.href = `screenshot.html?${query}`;
-  }
-});
+          const nextButton = document.getElementById("next-button");
+          const mainHeading = document.getElementById("main-heading");
+          const subMessage = document.getElementById("sub-message");
+          const emoticon = document.getElementById("emoticon");
+        
+          // Your messages - replace image URLs with local filenames or keep URLs if you want
+          const messages = [
+            {
+              heading: "Happy one year and two months!",
+              sub: "mi amor!",
+              emote: "(o´▽`o)",
+              image: "cinnamoroll.png",
+            },
+            {
+              heading: "I hope you have a wonderful day!",
+              sub: "You deserve it!",
+              emote: "(ﾉ´ヮ`)ﾉ*:･ﾟ✧",
+              image: "kawaii2.png",
+            },
+            {
+              heading: "Thank you for everything...",
+              sub: "You make me so happy!",
+              emote: "(*^-^*)",
+              image: "yay.png",
+            },
+            {
+              heading: "I love you!",
+              sub: "Always and forever.",
+              emote: "(´♡‿♡`)",
+              image: "heart.png",
+            },
+          ];
+        
+          // Read current page from URL if present (for back navigation)
+          const params = new URLSearchParams(window.location.search);
+          let currentPage = parseInt(params.get("page")) || 0;
+        
+          // Update heading, sub, emoticon
+          function updateCard(pageIndex) {
+            const page = messages[pageIndex];
+            mainHeading.textContent = page.heading;
+            subMessage.textContent = page.sub;
+            emoticon.textContent = page.emote;
+          }
+        
+          updateCard(currentPage);
+        
+          nextButton.addEventListener("click", () => {
+            const page = messages[currentPage];
+            const query = new URLSearchParams({
+              image: page.image,
+              page: currentPage,
+            }).toString();
+        
+            window.location.href = `screenshot.html?${query}`;
+          });
+        </script>
 
 
     </body>
