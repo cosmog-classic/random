@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=1080, initial-scale=1.0" />
   <title>Screenshot Message</title>
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Open+Sans:wght@400;700&display=swap");
@@ -10,64 +10,69 @@
     html, body {
       margin: 0;
       padding: 0;
-      width: 100%;
-      height: 100%;
+      width: 1080px;
+      height: 1920px;
       font-family: "Open Sans", sans-serif;
       background-color: #fff0f6;
       overflow: hidden;
     }
 
     .screenshot-container {
-      width: 1080px;
-      height: 1920px;
-      background: #ffffff;
-      border: 20px solid #ffb3c1;
-      border-radius: 48px;
-      box-shadow: 0 0 60px rgba(255, 105, 180, 0.3);
-      margin: 0 auto;
-      position: relative;
+      width: 100%;
+      height: 100%;
+      padding: 60px;
       box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
     }
 
-    .decorative-frame {
-      position: absolute;
-      top: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 900px;
+    .image-frame {
+      width: 600px;
+      height: 600px;
       background: #ffe0ec;
+      border: 16px dashed #ffb3c1;
+      border-radius: 48px;
+      padding: 30px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 40px rgba(255, 105, 180, 0.3);
+    }
+
+    .image-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       border-radius: 24px;
-      padding: 40px;
-      box-shadow: 0 0 30px rgba(255, 192, 203, 0.3);
+    }
+
+    .caption {
+      margin-top: 60px;
       text-align: center;
     }
 
-    .decorative-frame img {
-      width: 200px;
-      height: 200px;
-      border-radius: 24px;
-      margin-bottom: 30px;
-      box-shadow: 0 8px 16px rgba(255, 105, 180, 0.3);
-    }
-
-    .decorative-frame h1 {
+    .caption h1 {
       font-family: "Mochiy Pop One", sans-serif;
-      font-size: 3em;
+      font-size: 3.5em;
       color: #ff69b4;
-      margin-bottom: 20px;
+      margin: 0;
       text-shadow: 2px 2px white;
     }
 
-    .decorative-frame p {
-      font-size: 1.8em;
+    .caption p {
+      font-size: 2em;
       color: #e85d95;
       font-weight: bold;
-      margin-bottom: 15px;
+      margin-top: 20px;
     }
 
     .emoticon {
-      font-size: 2em;
       margin-top: 30px;
+      font-size: 2.5em;
       color: #f78fb3;
       font-family: monospace;
     }
@@ -75,8 +80,10 @@
 </head>
 <body>
   <div class="screenshot-container">
-    <div class="decorative-frame">
-      <img src="me.png" alt="Cute" />
+    <div class="image-frame">
+      <img src="https://placehold.co/600x600/ffd1e0/ff69b4?text=Love" alt="Framed Love" />
+    </div>
+    <div class="caption">
       <h1>I love you!</h1>
       <p>Always and forever.</p>
       <div class="emoticon">(´♡‿♡`)</div>
