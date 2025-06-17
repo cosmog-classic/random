@@ -180,6 +180,25 @@
 
             let currentPage = 0;
 
+            updateCard(currentPage);
+
+            nextButton.addEventListener("click", () => {
+                currentPage++;
+                if (currentPage < messages.length) {
+                    const page = messages[currentPage];
+                    // Redirect to screenshot.html with query parameters
+                    const url = new URL("screenshot.html", window.location.href);
+                    url.searchParams.set("image", page.image);
+                    url.searchParams.set("heading", page.heading);
+                    url.searchParams.set("sub", page.sub);
+                    url.searchParams.set("emote", page.emote);
+                    window.location.href = url.toString();
+                } else {
+                    currentPage = 0;
+                    updateCard(currentPage);
+                }
+            });
+
             // Function to update the card content
             function updateCard(pageIndex) {
                 const page = messages[pageIndex];
@@ -192,25 +211,7 @@
             // Initialize with the first page
             updateCard(currentPage);
 
-            // Event listener for the next button
-            nextButton.addEventListener("click", () => {
-                currentPage++;
-                if (currentPage < messages.length) {
-                    updateCard(currentPage);
-                    // Redirect to screenshot.html with query parameters
-                    const page = messages[currentPage];
-                    const url = new URL("screenshot.html", window.location.href);
-                    url.searchParams.set("image", page.image);
-                    url.searchParams.set("heading", page.heading);
-                    url.searchParams.set("sub", page.sub);
-                    url.searchParams.set("emote", page.emote);
-                    window.location.href = url.toString();
-                } else {
-                    // Optional fallback if you loop back or end
-                    currentPage = 0;
-                    updateCard(currentPage);
-                }
-            });
+
 
 
             });
