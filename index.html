@@ -73,17 +73,17 @@
 
     updateCard(currentPage);
 
-    nextButton.addEventListener("click", () => {
-      // Redirect to screenshot.html with current page info
-      const page = messages[currentPage];
-      const url = new URL("screenshot.html", window.location.href);
-      url.searchParams.set("image", page.image);
-      url.searchParams.set("heading", page.heading);
-      url.searchParams.set("sub", page.sub);
-      url.searchParams.set("emote", page.emote);
-      url.searchParams.set("page", currentPage); // send current page index
-      window.location.href = url.toString();
-    });
+   nextButton.addEventListener("click", () => {
+  const page = messages[currentPage];
+  const url = new URL("screenshot.html", window.location.href);
+  url.searchParams.set("image", page.image);  // just filename now
+  url.searchParams.set("heading", page.heading);
+  url.searchParams.set("sub", page.sub);
+  url.searchParams.set("emote", page.emote);
+  url.searchParams.set("page", currentPage);
+  window.location.href = url.toString();
+});
+
   </script>
 </body>
 </html>
