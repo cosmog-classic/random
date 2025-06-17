@@ -135,65 +135,67 @@
             <p class="emoticon" id="emoticon">(o´▽`o)</p>
             <p class="instructions">Click the next button!! ♡</p>
             <button id="next-button" class="next-button">Next!! ~w~</button>
-        </div>
-
+        </div>            
+        
         <script>
-            const nextButton = document.getElementById("next-button");
-            const mainHeading = document.getElementById("main-heading");
-            const subMessage = document.getElementById("sub-message");
-            const emoticon = document.getElementById("emoticon");
-          
-            // Your messages - replace image URLs with local filenames or keep URLs if you want
-            const messages = [
-              {
-                heading: "Happy one year and two months!",
-                sub: "mi amor!",
-                emote: "(o´▽`o)",
-                image: "cinnamoroll.png",
-              },
-              {
-                heading: "I hope you have a wonderful day!",
-                sub: "You deserve it!",
-                emote: "(ﾉ´ヮ`)ﾉ*:･ﾟ✧",
-                image: "kawaii2.png",
-              },
-              {
-                heading: "Thank you for everything...",
-                sub: "You make me so happy!",
-                emote: "(*^-^*)",
-                image: "yay.png",
-              },
-              {
-                heading: "I love you!",
-                sub: "Always and forever.",
-                emote: "(´♡‿♡`)",
-                image: "heart.png",
-              },
-            ];
-          
-            let currentPage = 0;
-          
-            // Update heading, sub, emoticon
-            function updateCard(pageIndex) {
-              const page = messages[pageIndex];
-              mainHeading.textContent = page.heading;
-              subMessage.textContent = page.sub;
-              emoticon.textContent = page.emote;
-            }
-          
-            updateCard(currentPage);
-          
-            nextButton.addEventListener("click", () => {
-              const page = messages[currentPage];
-              const query = new URLSearchParams({
-                image: page.image,
-                page: currentPage,
-              }).toString();
-            
-              window.location.href = `screenshot.html?${query}`;
-            });
+          const nextButton = document.getElementById("next-button");
+          const mainHeading = document.getElementById("main-heading");
+          const subMessage = document.getElementById("sub-message");
+          const emoticon = document.getElementById("emoticon");
+        
+          // Your messages - replace image URLs with local filenames or keep URLs if you want
+          const messages = [
+            {
+              heading: "Happy one year and two months!",
+              sub: "mi amor!",
+              emote: "(o´▽`o)",
+              image: "cinnamoroll.png",
+            },
+            {
+              heading: "I hope you have a wonderful day!",
+              sub: "You deserve it!",
+              emote: "(ﾉ´ヮ`)ﾉ*:･ﾟ✧",
+              image: "kawaii2.png",
+            },
+            {
+              heading: "Thank you for everything...",
+              sub: "You make me so happy!",
+              emote: "(*^-^*)",
+              image: "yay.png",
+            },
+            {
+              heading: "I love you!",
+              sub: "Always and forever.",
+              emote: "(´♡‿♡`)",
+              image: "heart.png",
+            },
+          ];
+        
+          // Read current page from URL if present (for back navigation)
+          const params = new URLSearchParams(window.location.search);
+          let currentPage = parseInt(params.get("page")) || 0;
+        
+          // Update heading, sub, emoticon
+          function updateCard(pageIndex) {
+            const page = messages[pageIndex];
+            mainHeading.textContent = page.heading;
+            subMessage.textContent = page.sub;
+            emoticon.textContent = page.emote;
+          }
+        
+          updateCard(currentPage);
+        
+          nextButton.addEventListener("click", () => {
+            const page = messages[currentPage];
+            const query = new URLSearchParams({
+              image: page.image,
+              page: currentPage,
+            }).toString();
+        
+            window.location.href = `screenshot.html?${query}`;
+          });
+        </script>
 
-          </script>
 
     </body>
 </html>
