@@ -106,7 +106,7 @@
     const emoticon = document.getElementById("emoticon");
     const backButton = document.getElementById("back-button");
 
-    cardImage.src = image || "";
+    cardImage.src = image ? `./${image}` : "";
     mainHeading.textContent = heading || "";
     subMessage.textContent = sub || "";
     emoticon.textContent = emote || "";
