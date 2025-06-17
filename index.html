@@ -111,6 +111,12 @@
         transform: translateY(2px);
         box-shadow: 0 2px 10px rgba(255, 105, 180, 0.4);
       }
+      .blur-text {
+        filter: blur(8px);
+        transition: filter 0.5s ease;
+        cursor: pointer;
+        user-select: none;
+      }
     </style>
   </head>
   <body>
@@ -160,37 +166,64 @@
           emote: "(´♡‿♡`)",
           image: "heart.png",
         },
+        {
+          heading: "🎉 Surprise Gift! 🎁",
+          sub: "You unlocked a secret present!",
+          emote: "ヽ(＾Д＾)ﾉ",
+        },
       ];
 
       const params = new URLSearchParams(window.location.search);
       let currentPage = parseInt(params.get("page")) || 0;
-
+      
       function updateCard(pageIndex) {
         const page = messages[pageIndex];
         mainHeading.textContent = page.heading;
         subMessage.textContent = page.sub;
         emoticon.textContent = page.emote;
-
-        // Update button text for last page
+      
         if (pageIndex === messages.length - 1) {
+          // Surprise gift card
+          nextButton.textContent = "Reveal the gift";
+          nextButton.disabled = false;
+      
+          // Blur the sub-message initially
+          subMessage.classList.add("blur-text");
+        } else if (pageIndex === messages.length - 2) {
+          // Last normal card before surprise
           nextButton.textContent = "Receive thine present";
+          nextButton.disabled = false;
+          subMessage.classList.remove("blur-text");
         } else {
+          // Other cards
           nextButton.textContent = "Next!! ~w~";
+          nextButton.disabled = false;
+          subMessage.classList.remove("blur-text");
         }
       }
 
       updateCard(currentPage);
 
-      nextButton.addEventListener("click", () => {
-        const nextPage = currentPage; // keep as-is
+    nextButton.addEventListener("click", () => {
+      if (currentPage === messages.length - 2) {
+        // On last normal card: go to surprise gift card
+        window.location.href = `index.html?page=${messages.length - 1}`;
+      } else if (currentPage === messages.length - 1) {
+        // On surprise card: Reveal the gift text by removing blur
+        subMessage.classList.remove("blur-text");
+        nextButton.disabled = true;  // disable button after reveal or you can hide it
+      } else {
+        // Intermediate cards: go to screenshot.html
         const image = messages[currentPage].image;
         const query = new URLSearchParams({
           image: image,
-          page: nextPage,
+          page: currentPage,
         }).toString();
-      
+    
         window.location.href = `screenshot.html?${query}`;
-      });
+      }
+    });
+
     </script>
   </body>
 </html>
