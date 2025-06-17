@@ -25,8 +25,7 @@
         background-size: 20px 20px;
       }
 
-      .memo-card,
-      #final-message {
+      .memo-card {
         background-color: white;
         width: 90%;
         max-width: 400px;
@@ -112,23 +111,10 @@
         transform: translateY(2px);
         box-shadow: 0 2px 10px rgba(255, 105, 180, 0.4);
       }
-
-      #final-message {
-        display: none;
-        animation: fadeIn 0.6s ease-out forwards;
-        opacity: 0;
-      }
-
-      @keyframes fadeIn {
-        to {
-          opacity: 1;
-        }
-      }
     </style>
   </head>
   <body>
-    <!-- Memo Card -->
-    <div class="memo-card" id="memo-card">
+    <div class="memo-card">
       <div class="image-container">
         <img
           id="card-image"
@@ -141,56 +127,52 @@
       <p class="emoticon" id="emoticon">(o´▽`o)</p>
       <p class="instructions">Click the next button!! ♡</p>
       <button id="next-button" class="next-button">Next!! ~w~</button>
-    </div>
-
-    <!-- Final Surprise Message -->
-    <div id="final-message">
-      <h1>🎁 You found the surprise!</h1>
-      <p class="sub-message">I made this just for you... hope you loved it ♡</p>
-      <p class="emoticon">(｡♥‿♥｡)</p>
-    </div>
+    </div>            
 
     <script>
       const nextButton = document.getElementById("next-button");
       const mainHeading = document.getElementById("main-heading");
       const subMessage = document.getElementById("sub-message");
       const emoticon = document.getElementById("emoticon");
-      const memoCard = document.getElementById("memo-card");
-      const finalMessage = document.getElementById("final-message");
 
       const messages = [
         {
           heading: "Happy one year and two months!",
           sub: "mi amor!",
           emote: "(o´▽`o)",
+          image: "cinnamoroll.png",
         },
         {
           heading: "I hope you have a wonderful day!",
           sub: "You deserve it!",
           emote: "(ﾉ´ヮ`)ﾉ*:･ﾟ✧",
+          image: "kawaii2.png",
         },
         {
           heading: "Thank you for everything...",
           sub: "You make me so happy!",
           emote: "(*^-^*)",
+          image: "yay.png",
         },
         {
           heading: "I love you!",
           sub: "Always and forever.",
           emote: "(´♡‿♡`)",
+          image: "heart.png",
         },
       ];
 
-      let currentPage = 0;
+      const params = new URLSearchParams(window.location.search);
+      let currentPage = parseInt(params.get("page")) || 0;
 
-      function updateCard(index) {
-        const page = messages[index];
+      function updateCard(pageIndex) {
+        const page = messages[pageIndex];
         mainHeading.textContent = page.heading;
         subMessage.textContent = page.sub;
         emoticon.textContent = page.emote;
 
-        // Change button label on last card
-        if (index === messages.length - 1) {
+        // Update button text for last page
+        if (pageIndex === messages.length - 1) {
           nextButton.textContent = "Receive thine present";
         } else {
           nextButton.textContent = "Next!! ~w~";
@@ -200,13 +182,14 @@
       updateCard(currentPage);
 
       nextButton.addEventListener("click", () => {
-        if (currentPage === messages.length - 1) {
-          memoCard.style.display = "none";
-          finalMessage.style.display = "block";
-        } else {
-          currentPage++;
-          updateCard(currentPage);
-        }
+        const nextPage = currentPage + 1 >= messages.length ? currentPage : currentPage + 1;
+        const image = messages[currentPage].image;
+        const query = new URLSearchParams({
+          image: image,
+          page: nextPage,
+        }).toString();
+
+        window.location.href = `screenshot.html?${query}`;
       });
     </script>
   </body>
