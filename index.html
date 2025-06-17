@@ -1,89 +1,203 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>A Cute Message</title>
-  <style>
-    /* Your existing styles here (same as before) */
-    /* ... */
-  </style>
-</head>
-<body>
-  <div class="memo-card">
-    <h1 id="main-heading">Happy one year and two months!</h1>
-    <div class="sub-message" id="sub-message">mi amor!</div>
-    <p class="emoticon" id="emoticon">(o´▽`o)</p>
-    <p class="instructions">Click the next button!! ♡</p>
-    <button id="next-button" class="next-button">Next!! ~w~</button>
-  </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>A Cute Message</title>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Open+Sans:wght@400;700&display=swap");
 
-  <script>
-    const nextButton = document.getElementById("next-button");
-    const mainHeading = document.getElementById("main-heading");
-    const subMessage = document.getElementById("sub-message");
-    const emoticon = document.getElementById("emoticon");
-    const cardImage = document.getElementById("card-image");
+            /* Basic Styles */
+            body,
+            html {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: "Open Sans", sans-serif;
+                background-color: #fcefee;
+                /* Subtle background pattern */
+                background-image:
+                    linear-gradient(45deg, #f9d6d5 25%, transparent 25%),
+                    linear-gradient(-45deg, #f9d6d5 25%, transparent 25%),
+                    linear-gradient(45deg, transparent 75%, #f9d6d5 75%),
+                    linear-gradient(-45deg, transparent 75%, #f9d6d5 75%);
+                background-size: 20px 20px;
+            }
 
-    const messages = [
-      {
-        heading: "Happy one year and two months!",
-        sub: "mi amor!",
-        emote: "(o´▽`o)",
-        image: "https://placehold.co/100x100/f8c8dc/a47c8a?text=Cinnamoroll",
-      },
-      {
-        heading: "I hope you have a wonderful day!",
-        sub: "You deserve it!",
-        emote: "(ﾉ´ヮ`)ﾉ*:･ﾟ✧",
-        image: "https://placehold.co/100x100/c9e4f7/849db1?text=Kawaii+2",
-      },
-      {
-        heading: "Thank you for everything...",
-        sub: "You make me so happy!",
-        emote: "(*^-^*)",
-        image: "https://placehold.co/100x100/d4f0d4/8eb38e?text=Yay!",
-      },
-      {
-        heading: "I love you!",
-        sub: "Always and forever.",
-        emote: "(´♡‿♡`)",
-        image: "https://placehold.co/100x100/ffdccc/b59280?text=Heart",
-      },
-    ];
+            /* Main memo card container */
+            .memo-card {
+                background-color: white;
+                width: 90%;
+                max-width: 400px;
+                padding: 30px;
+                border-radius: 24px;
+                border: 2px dashed #ffb3c1;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                text-align: center;
+                transform: scale(0.95);
+                animation: popIn 0.5s ease-out forwards;
+            }
 
-    // Parse 'page' from URL query string, default to 0
-    function getPageFromURL() {
-      const params = new URLSearchParams(window.location.search);
-      let pageNum = parseInt(params.get("page"), 10);
-      if (isNaN(pageNum) || pageNum < 0 || pageNum >= messages.length) {
-        pageNum = 0;
-      }
-      return pageNum;
-    }
+            @keyframes popIn {
+                to {
+                    transform: scale(1);
+                }
+            }
 
-    let currentPage = getPageFromURL();
+            /* Image container */
+            .image-container {
+                background-color: #ffdde1;
+                padding: 10px;
+                border-radius: 16px;
+                display: inline-block;
+                margin-bottom: 20px;
+                border: 2px solid #fff;
+                box-shadow: 0 4px 10px rgba(255, 179, 193, 0.5);
+            }
 
-    function updateCard(pageIndex) {
-      const page = messages[pageIndex];
-      mainHeading.textContent = page.heading;
-      subMessage.textContent = page.sub;
-      emoticon.textContent = page.emote;
-    }
+            .image-container img {
+                width: 100px;
+                height: 100px;
+                display: block;
+                border-radius: 12px;
+            }
 
-    updateCard(currentPage);
+            /* Main Heading */
+            h1 {
+                font-family: "Mochiy Pop One", sans-serif;
+                color: #ff69b4;
+                font-size: 1.8em;
+                text-shadow:
+                    2px 2px 0px #fff,
+                    4px 4px 0px #ffb3c1;
+                margin: 0 0 25px 0;
+            }
 
-   nextButton.addEventListener("click", () => {
-  const page = messages[currentPage];
-  const url = new URL("screenshot.html", window.location.href);
-  url.searchParams.set("image", page.image);  // just filename now
-  url.searchParams.set("heading", page.heading);
-  url.searchParams.set("sub", page.sub);
-  url.searchParams.set("emote", page.emote);
-  url.searchParams.set("page", currentPage);
-  window.location.href = url.toString();
-});
+            /* Dashed box for secondary text */
+            .sub-message {
+                border: 2px dashed #ffb3c1;
+                border-radius: 12px;
+                padding: 15px;
+                margin: 20px 0;
+                font-size: 1.2em;
+                color: #e85d95;
+                font-weight: bold;
+            }
 
-  </script>
-</body>
+            /* Emoticon and instruction styles */
+            .emoticon {
+                font-family: monospace;
+                color: #f78fb3;
+                font-size: 1.2em;
+                margin: 20px 0;
+            }
+
+            .instructions {
+                color: #aaa;
+                margin-bottom: 25px;
+                font-size: 0.9em;
+            }
+
+            /* Next button styling */
+            .next-button {
+                font-family: "Mochiy Pop One", sans-serif;
+                background: linear-gradient(45deg, #ff8fab, #ffafcc);
+                color: white;
+                border: none;
+                padding: 15px 35px;
+                border-radius: 50px;
+                font-size: 1.1em;
+                cursor: pointer;
+                box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+                transition: all 0.3s ease;
+                border-bottom: 4px solid #e85d95;
+            }
+
+            .next-button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 20px rgba(255, 105, 180, 0.5);
+            }
+
+            .next-button:active {
+                transform: translateY(2px);
+                box-shadow: 0 2px 10px rgba(255, 105, 180, 0.4);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="memo-card">
+            <div class="image-container">
+                <img
+                    id="card-image"
+                    src="https://placehold.co/100x100/f8c8dc/a47c8a?text=Cute+Icon"
+                    alt="Cute Icon"
+                />
+            </div>
+            <h1 id="main-heading">Happy one year and two months!</h1>
+            <div class="sub-message" id="sub-message">mi amor!</div>
+            <p class="emoticon" id="emoticon">(o´▽`o)</p>
+            <p class="instructions">Click the next button!! ♡</p>
+            <button id="next-button" class="next-button">Next!! ~w~</button>
+        </div>
+
+        <script>
+            const nextButton = document.getElementById("next-button");
+            const mainHeading = document.getElementById("main-heading");
+            const subMessage = document.getElementById("sub-message");
+            const emoticon = document.getElementById("emoticon");
+          
+            // Your messages - replace image URLs with local filenames or keep URLs if you want
+            const messages = [
+              {
+                heading: "Happy one year and two months!",
+                sub: "mi amor!",
+                emote: "(o´▽`o)",
+                image: "cinnamoroll.png",
+              },
+              {
+                heading: "I hope you have a wonderful day!",
+                sub: "You deserve it!",
+                emote: "(ﾉ´ヮ`)ﾉ*:･ﾟ✧",
+                image: "kawaii2.png",
+              },
+              {
+                heading: "Thank you for everything...",
+                sub: "You make me so happy!",
+                emote: "(*^-^*)",
+                image: "yay.png",
+              },
+              {
+                heading: "I love you!",
+                sub: "Always and forever.",
+                emote: "(´♡‿♡`)",
+                image: "heart.png",
+              },
+            ];
+          
+            let currentPage = 0;
+          
+            // Update heading, sub, emoticon
+            function updateCard(pageIndex) {
+              const page = messages[pageIndex];
+              mainHeading.textContent = page.heading;
+              subMessage.textContent = page.sub;
+              emoticon.textContent = page.emote;
+            }
+          
+            updateCard(currentPage);
+          
+            nextButton.addEventListener("click", () => {
+              currentPage = (currentPage + 1) % messages.length;
+              updateCard(currentPage);
+          
+              // Redirect to screenshot.html with current image filename
+              const imageFile = messages[currentPage].image;
+              window.location.href = `screenshot.html?image=${encodeURIComponent(imageFile)}`;
+            });
+          </script>
+
+    </body>
 </html>
