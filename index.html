@@ -195,8 +195,13 @@
             // Event listener for the next button
             nextButton.addEventListener("click", () => {
                 // Move to the next page, or loop back to the start
-                currentPage = (currentPage + 1) % messages.length;
+            currentPage++;
+            if (currentPage < messages.length) {
                 updateCard(currentPage);
+            } else {
+                window.location.href = "screenshot.html";
+            }
+
             });
         </script>
     </body>
