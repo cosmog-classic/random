@@ -194,13 +194,24 @@
 
             // Event listener for the next button
             nextButton.addEventListener("click", () => {
-                // Move to the next page, or loop back to the start
-            currentPage++;
-            if (currentPage < messages.length) {
-                updateCard(currentPage);
-            } else {
-                window.location.href = "screenshot.html";
-            }
+                currentPage++;
+                if (currentPage < messages.length) {
+                    updateCard(currentPage);
+                    // Redirect to screenshot.html with query parameters
+                    const page = messages[currentPage];
+                    const url = new URL("screenshot.html", window.location.href);
+                    url.searchParams.set("image", page.image);
+                    url.searchParams.set("heading", page.heading);
+                    url.searchParams.set("sub", page.sub);
+                    url.searchParams.set("emote", page.emote);
+                    window.location.href = url.toString();
+                } else {
+                    // Optional fallback if you loop back or end
+                    currentPage = 0;
+                    updateCard(currentPage);
+                }
+            });
+
 
             });
         </script>
