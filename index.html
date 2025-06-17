@@ -184,13 +184,15 @@
             updateCard(currentPage);
           
             nextButton.addEventListener("click", () => {
-              currentPage = (currentPage + 1) % messages.length;
-              updateCard(currentPage);
-          
-              // Redirect to screenshot.html with current image filename
-              const imageFile = messages[currentPage].image;
-              window.location.href = `screenshot.html?image=${encodeURIComponent(imageFile)}`;
+              const page = messages[currentPage];
+              const query = new URLSearchParams({
+                image: page.image,
+                page: currentPage,
+              }).toString();
+            
+              window.location.href = `screenshot.html?${query}`;
             });
+
           </script>
 
     </body>
