@@ -182,13 +182,13 @@
       updateCard(currentPage);
 
       nextButton.addEventListener("click", () => {
-        const nextPage = currentPage + 1 >= messages.length ? currentPage : currentPage + 1;
+        const nextPage = currentPage; // keep as-is
         const image = messages[currentPage].image;
         const query = new URLSearchParams({
           image: image,
           page: nextPage,
         }).toString();
-
+      
         window.location.href = `screenshot.html?${query}`;
       });
     </script>
