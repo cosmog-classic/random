@@ -94,5 +94,18 @@
       <div class="emoticon">(´♡‿♡`)</div>
     </div>
   </div>
+  <script>
+  const params = new URLSearchParams(window.location.search);
+  const img = params.get("image");
+  const heading = params.get("heading");
+  const sub = params.get("sub");
+  const emote = params.get("emote");
+
+  if (img) document.querySelector(".image-frame img").src = img;
+  if (heading) document.querySelector(".caption h1").textContent = heading;
+  if (sub) document.querySelector(".caption p").textContent = sub;
+  if (emote) document.querySelector(".emoticon").textContent = emote;
+</script>
+
 </body>
 </html>
